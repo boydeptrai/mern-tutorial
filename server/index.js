@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const authRouter = require('./routes/auth')
 const app = express();
 
 dotenv.config();
@@ -21,7 +22,9 @@ const connectDB = async () => {
 };
 connectDB();
 
-app.get("/", (req, res) => res.send("Hello world"));
+app.use(express.json())
+
+app.use("/api/auth",authRouter);
 
 const PORT = 5000;
 
